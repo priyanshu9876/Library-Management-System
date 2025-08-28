@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Return Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 70%;
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .actions button:hover {
+            background-color: #388E3C;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div>User</div>
+            <div>Return Book</div>
+            <div><a href="{{ url_for('user_page') }}">Home</a></div>
+        </div>
+
+        <form action="{{ url_for('user_returnbook') }}" method="POST">
+            <table>
+                <tr>
+                    <th>Book Name</th>
+                    <td><input type="text" name="returnBookName" placeholder="Enter the book name" required></td>
+                </tr>
+                <tr>
+                    <th>Return Date</th>
+                    <td><input type="date" name="returnDate" required></td>
+                </tr>
+                <tr>
+                    <th>Remarks</th>
+                    <td><textarea name="remarks" placeholder="Optional remarks"></textarea></td>
+                </tr>
+            </table>
+
+            <div class="actions">
+                <button type="submit">Confirm Return</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

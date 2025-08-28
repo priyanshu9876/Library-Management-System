@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Membership</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #4CAF50;
+            color: white;
+        }
+        .menu-section {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 50%;
+        }
+        .menu-section h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        form label {
+            font-weight: bold;
+            color: #555;
+        }
+        form input[type="text"],
+        form input[type="radio"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+        form .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        form button {
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">Update Membership</div>
+    <div class="menu-section">
+        <h3>Update Membership</h3>
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+        <form action="{{ url_for('update_membership') }}" method="post">
+            <label for="userName">User Name:</label>
+            <input type="text" id="userName" name="userName" required>
+
+            <label>Membership Extension:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="membershipExtension" value="six_months" required> Six Months</label>
+                <label><input type="radio" name="membershipExtension" value="one_year"> One Year</label>
+                <label><input type="radio" name="membershipExtension" value="two_years"> Two Years</label>
+                <label><input type="radio" name="membershipExtension" value="remove_membership"> Remove Membership</label>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

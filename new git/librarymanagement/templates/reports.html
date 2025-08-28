@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            border-bottom: 4px solid #388E3C;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 900px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .content-title {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        .menu-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .menu-section h3 {
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            color: #333;
+        }
+        .reports-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .reports-table td, .reports-table th {
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #e7f3fe;
+            text-align: center;
+        }
+        .reports-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .actions button {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .actions button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        .logout {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .logout button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .logout button:hover {
+            background-color: #d32f2f;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>Charts</div>
+        <div>Reports</div>
+    </div>
+
+    <!-- Report Section -->
+    <div class="container">
+        <div class="content-title">Available Reports</div>
+
+        <!-- Books Report -->
+        <div class="menu-section">
+            <h3>Master List of Books</h3>
+            <table class="reports-table">
+                <thead>
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Media Type</th>
+                        <th>Status</th>
+                        <th>Procurement Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <td>{{ book.name }}</td>
+                        <td>{{ book.media_type }}</td>
+                        <td>{{ book.status }}</td>
+                        <td>{{ book.procurement_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Users Report -->
+        <div class="menu-section">
+            <h3>Master List of Users</h3>
+            <table class="reports-table">
+                <thead>
+                    <tr>
+                       
+                        <th>Name</th> <!-- Added column for Name -->
+                        <th>Password</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        
+                        <td>{{ user.name }}</td> <!-- Display user name -->
+                        <td>{{ user.password }}</td>
+                        <td>{{ user.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Membership Report -->
+        <div class="menu-section">
+            <h3>Master List of Memberships</h3>
+            <table class="reports-table">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Membership Type</th>
+                        <th>Joining Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for membership in memberships %}
+                    <tr>
+                        <td>{{ membership.user_name }}</td> <!-- Display user name -->
+                        <td>{{ membership.membership_type }}</td>
+                        <td>{{ membership.joining_date }}</td>
+                        <td>{{ membership.end_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Fines Report -->
+        <div class="menu-section">
+            <h3>Master List of Fines</h3>
+            <table class="reports-table">
+                <thead>
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Fine Calculated</th>
+                        <th>Fine Paid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fine in fines %}
+                    <tr>
+                        <td>{{ fine.book_name }}</td>
+                        <td>{{ fine.fine_calculated }}</td>
+                        <td>{{ fine.fine_paid }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Actions Section -->
+        <div class="actions">
+            <button onclick="window.print()">Print Report</button>
+        </div>
+    </div>
+
+    <!-- Logout Button -->
+    <div class="logout">
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit">Log Out</button>
+        </form>
+    </div>
+
+</body>
+</html>

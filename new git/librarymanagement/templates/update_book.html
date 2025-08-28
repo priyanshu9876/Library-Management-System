@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input, select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 100%;
+        }
+        input[type="checkbox"] {
+            width: auto;
+        }
+        button {
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+        .success {
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update Book</h1>
+
+        <!-- Display flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div>
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('update_book') }}" method="POST">
+            <!-- Select Original Book Name -->
+            <label for="originalName">Select Original Book Name</label>
+            <select id="originalName" name="originalName" required>
+                <option value="" disabled selected>Select a book</option>
+                {% for book in books %}
+                    <option value="{{ book.name }}">{{ book.name }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- New Book Name (Optional) -->
+            <label for="newName">New Book Name (Optional)</label>
+            <input type="text" id="newName" name="newName" placeholder="Enter new book name">
+
+            <!-- Media Type -->
+            <label for="mediaType">Media Type</label>
+            <select id="mediaType" name="mediaType" required>
+                <option value="" disabled selected>Select media type</option>
+                <option value="Book">Book</option>
+                <option value="DVD">DVD</option>
+                <option value="Magazine">Magazine</option>
+            </select>
+
+            <!-- Status -->
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                <option value="" disabled selected>Select status</option>
+                <option value="Available">Available</option>
+                <option value="Issued">Issued</option>
+                <option value="Reserved">Reserved</option>
+            </select>
+
+            <!-- Procurement Date -->
+            <label for="procurementDate">Procurement Date</label>
+            <input type="date" id="procurementDate" name="procurementDate" required>
+
+            <!-- Delete Book Checkbox -->
+            <label>
+                <input type="checkbox" id="deleteBook" name="deleteBook">
+                Delete this book
+            </label>
+
+            <!-- Submit Button -->
+            <button type="submit">Update Book</button>
+        </form>
+    </div>
+</body>
+</html>
